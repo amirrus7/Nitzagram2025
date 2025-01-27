@@ -28,8 +28,15 @@ class Post:
 
         :return: None
         """
-        # TODO: write me!
-        pass
+        # img = pygame.image.load()
+        # img = pygame.transform.scale(img, POST_WIDTH, POST_HEIGHT)
+        # screen.blit(img, (POST_X_POS, POST_Y_POS))
+
+
+        font = pygame.font.SysFont("Garamond", TEXT_POST_FONT_SIZE)
+        text = font.render(self.username, True, BLACK)
+        screen.blit(text, [POST_X_POS, POST_Y_POS])
+
 
 
     def display_comments(self):
