@@ -33,9 +33,25 @@ class Post:
         # screen.blit(img, (POST_X_POS, POST_Y_POS))
 
 
-        font = pygame.font.SysFont("Garamond", TEXT_POST_FONT_SIZE)
-        text = font.render(self.username, True, BLACK)
-        screen.blit(text, [POST_X_POS, POST_Y_POS])
+        username_font = pygame.font.SysFont("Garamond", UI_FONT_SIZE)
+        text = username_font.render(self.username, True, BLACK)
+        screen.blit(text, [USER_NAME_X_POS, USER_NAME_Y_POS])
+
+        likes_font = pygame.font.SysFont("Garamond", UI_FONT_SIZE)
+        text = likes_font.render(self.counter_likes, True, BLACK)
+        screen.blit(text, [LIKE_TEXT_X_POS, LIKE_TEXT_Y_POS])
+
+        description_font = pygame.font.SysFont("Garamond", UI_FONT_SIZE)
+        text = description_font.render(self.description, True, BLACK)
+        screen.blit(text, [DESCRIPTION_TEXT_X_POS, DESCRIPTION_TEXT_Y_POS])
+
+        location_font = pygame.font.SysFont("Garamond", UI_FONT_SIZE)
+        text = location_font.render(self.location, True, BLACK)
+        screen.blit(text, [LOCATION_TEXT_X_POS, LOCATION_TEXT_Y_POS])
+
+        self.display_comments()
+
+
 
 
 
