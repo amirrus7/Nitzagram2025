@@ -1,18 +1,24 @@
 import pygame
+from constants import *
 from helpers import *
-
+from classes.ImagePost import ImagePost
+from classes.TextPost import TextPost
 
 def main():
     pygame.init()
 
+    # יצירת מסך
+    screenn = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
     pygame.display.set_caption('Nitzagram')
 
     clock = pygame.time.Clock()
 
+    # טעינת רקע
     background = pygame.image.load('Images/background.png')
     background = pygame.transform.scale(background, (WINDOW_WIDTH, WINDOW_HEIGHT))
 
-    post1 = ImagePost("Images/post1.jpg", 100, ["Great!", "Nice photo!"])
+    # יצירת פוסטים פעם אחת בלבד
+    post1 = ImagePost("Images/ronaldo.jpg", 100, ["Great!", "Nice photo!"])
     post2 = TextPost("Just another text post", 50, ["Interesting!", "I agree."])
     posts = [post1, post2]
 
@@ -22,22 +28,22 @@ def main():
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                running = False  # יציאה מהלולאה כשסוגרים את החלון
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:  # בדיקה אם זה קליק שמאלי
-                    current_post_index += 1
-                    if current_post_index >= len(posts):
-                        current_post_index = 0  # חזרה לפוסט הראשון אם הגעת לסוף
+                if event.button == 1:  # קליק שמאלי
+                    current_post_index = (current_post_index + 1) % len(posts)  # מעבר בלולאה
 
-        screen.fill(BLACK)
-        screen.blit(background, (0, 0))
+        screenn.fill(BLACK)
+        screenn.blit(background, (0, 0))
 
-        posts[current_post_index].display(screen)
+        # תצוגת הפוסט הנוכחי
+        posts[current_post_index].display(screenn)
 
-        pygame.display.update()
+        pygame.display.update()  # עדכון התצוגה
+        clock.tick(60)  # שמירה על קצב התצוגה
 
-        clock.tick(60)
+    pygame.quit()  # סגירת pygame
 
-    pygame.quit()
-    quit()
+if __name__ == "__main__":
+    main()
